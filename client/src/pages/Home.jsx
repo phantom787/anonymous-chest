@@ -21,27 +21,31 @@ export default function Home() {
     fetchStories();
   }, []);
 
-  // Extract unique categories
   const categories = Array.from(new Set(stories.map((s) => s.category).filter(Boolean)));
-
-  // Filtered stories
   const filteredStories = selectedCategory
     ? stories.filter((s) => s.category === selectedCategory)
     : stories;
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-purple-500 to-indigo-600 text-white p-6">
+    <div className="min-h-screen bg-gradient-to-b from-purple-400 via-pink-400 to-indigo-500 font-sans">
       
-      {/* Hero / Dashboard */}
-      <header className="text-center py-12">
-        <h1 className="text-5xl font-bold mb-4">Welcome to the Open Chest</h1>
-        <p className="text-xl max-w-xl mx-auto">
-          A safe space to share what’s in your chest and read stories from others. You are never alone.
+      {/* Hero Section */}
+      <header className="text-center py-20 relative">
+        <h1 className="text-6xl font-extrabold mb-4 text-white drop-shadow-lg animate-pulse">
+          💜 Open Chest 💜
+        </h1>
+        <p className="text-xl max-w-2xl mx-auto text-white/90">
+          Share what’s on your chest anonymously and read stories from others. You are never alone.
         </p>
+        <div className="mt-6 flex justify-center">
+          <span className="text-6xl animate-bounce">📝</span>
+        </div>
       </header>
 
       {/* Story Submission */}
-      <StoryForm onStorySubmitted={fetchStories} />
+      <div className="relative -mt-12 z-10">
+        <StoryForm onStorySubmitted={fetchStories} />
+      </div>
 
       {/* Category Filter */}
       {categories.length > 0 && (
@@ -53,20 +57,24 @@ export default function Home() {
       )}
 
       {/* Stories Feed */}
-      <section className="max-w-3xl mx-auto">
-        <h2 className="text-3xl font-semibold mb-6 text-center">Stories From Others</h2>
+      <section className="max-w-4xl mx-auto mb-12 px-4">
+        <h2 className="text-4xl font-bold mb-8 text-center text-white drop-shadow-md animate-fade-in">
+          Stories Shared By Others
+        </h2>
         {filteredStories.length === 0 && (
-          <p className="text-center text-gray-200">No stories yet. Be the first to share!</p>
+          <p className="text-center text-white/80 mb-6">No stories yet. Be the first to share!</p>
         )}
-        <div className="space-y-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {filteredStories.map((story) => (
             <div
               key={story.id}
-              className="bg-white text-gray-800 p-5 rounded-2xl shadow-md hover:shadow-xl transition-shadow"
+              className="bg-white/90 backdrop-blur-md text-gray-800 p-6 rounded-3xl shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300"
             >
-              <p className="mb-2">{story.content}</p>
+              <p className="mb-3 text-lg leading-relaxed">{story.content}</p>
               {story.category && (
-                <span className="text-sm text-purple-700 font-medium">Category: {story.category}</span>
+                <span className="text-sm text-purple-600 font-semibold">
+                  Category: {story.category}
+                </span>
               )}
             </div>
           ))}
