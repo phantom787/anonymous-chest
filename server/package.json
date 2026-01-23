@@ -1,9 +1,25 @@
 {
-  "name": "server",
+  "name": "anonymous-open-chest-server",
   "version": "1.0.0",
-  "type": "module",
+  "description": "Backend for Anonymous Open Chest Story Sharing App",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "keywords": [],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.1.4",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "pg": "^8.11.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
   }
 }
