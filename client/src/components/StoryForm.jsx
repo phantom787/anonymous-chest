@@ -3,7 +3,6 @@ import { api } from "../services/api";
 
 export default function StoryForm({ onStorySubmitted }) {
   const [content, setContent] = useState("");
-  const [category, setCategory] = useState("");
   const [message, setMessage] = useState("");
 
   const handleSubmit = async (e) => {
@@ -11,10 +10,9 @@ export default function StoryForm({ onStorySubmitted }) {
     if (!content.trim()) return;
 
     try {
-      await api.post("/stories", { content, category });
-      setMessage("Thank you for sharing!");
+      await api.post("/stories", { content }); // only content, no category
+      setMessage("Thank You for Sharing!");
       setContent("");
-      setCategory("");
       onStorySubmitted();
       setTimeout(() => setMessage(""), 3000); // hide message after 3s
     } catch (err) {
@@ -35,7 +33,11 @@ export default function StoryForm({ onStorySubmitted }) {
         />
         <button type="submit">Thank You for Sharing</button>
       </form>
-      {message && <p style={{ marginTop: "0.5rem", textAlign: "center", color: "#28a745", fontWeight: "600" }}>{message}</p>}
+      {message && (
+        <p style={{ marginTop: "0.5rem", textAlign: "center", color: "#28a745", fontWeight: "600" }}>
+          {message}
+        </p>
+      )}
     </section>
   );
 }
