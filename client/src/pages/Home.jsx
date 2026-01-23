@@ -30,9 +30,8 @@ export default function Home() {
     <div>
       {/* Hero Section */}
       <header className="hero">
-        <h1>💜 Open Chest 💜</h1>
-        <p>Share what’s on your chest anonymously and read stories from others. You are never alone.</p>
-        <div className="hero-emoji">📝</div>
+        <h1>Open Chest</h1>
+        <p>A safe, anonymous place to share your story and read others. You are never alone.</p>
       </header>
 
       {/* Story Form */}
@@ -49,11 +48,11 @@ export default function Home() {
 
       {/* Stories Feed */}
       <section className="stories-feed">
-        {filteredStories.length === 0 && <p className="text-center text-white">No stories yet!</p>}
+        {filteredStories.length === 0 && <p style={{ textAlign: "center", color: "#c4f0b0" }}>No stories yet!</p>}
         {filteredStories.map((story) => (
           <div key={story.id} className="story-card">
             <p>{story.content}</p>
-            {story.category && <span>Category: {story.category}</span>}
+            {story.category && <span>{story.category}</span>}
           </div>
         ))}
       </section>
