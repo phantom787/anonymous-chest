@@ -9,7 +9,7 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-// Initialize table if not exists
+// Initialize table
 (async () => {
   await pool.query(`
     CREATE TABLE IF NOT EXISTS stories (
@@ -40,9 +40,7 @@ app.post("/api/stories", async (req, res) => {
 // GET /api/stories
 app.get("/api/stories", async (req, res) => {
   try {
-    const result = await pool.query(
-      "SELECT * FROM stories ORDER BY created_at DESC"
-    );
+    const result = await pool.query("SELECT * FROM stories ORDER BY created_at DESC");
     res.json(result.rows);
   } catch (err) {
     console.error(err);
@@ -50,6 +48,5 @@ app.get("/api/stories", async (req, res) => {
   }
 });
 
-// Start server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
