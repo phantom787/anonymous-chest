@@ -1,23 +1,35 @@
-import express from "express";
-import cors from "cors";
-import bodyParser from "body-parser";
-import { pool } from "./db.js";
-import dotenv from "dotenv";
+// Use CommonJS syntax for Render compatibility
+const express = require("express");
+const cors = require("cors");
+const bodyParser = require("body-parser");
+require("dotenv").config();
 
-dotenv.config();
+const { Pool } = require("pg");
+
+// Initialize Postgres pool
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: { rejectUnauthorized: false }
+});
+
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
 // Initialize table
 (async () => {
-  await pool.query(`
-    CREATE TABLE IF NOT EXISTS stories (
-      id SERIAL PRIMARY KEY,
-      content TEXT NOT NULL,
-      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-    )
-  `);
+  try {
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS stories (
+        id SERIAL PRIMARY KEY,
+        content TEXT NOT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      )
+    `);
+    console.log("Table initialized");
+  } catch (err) {
+    console.error("Error creating table:", err);
+  }
 })();
 
 // POST /api/stories
