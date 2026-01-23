@@ -8,14 +8,15 @@ export default function StoryForm({ onStorySubmitted }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!content.trim()) return alert("Please write something!");
+    if (!content.trim()) return;
 
     try {
       await api.post("/stories", { content, category });
-      setMessage("Story shared successfully!");
+      setMessage("Thank you for sharing!");
       setContent("");
       setCategory("");
-      onStorySubmitted(); // notify parent to refresh stories
+      onStorySubmitted();
+      setTimeout(() => setMessage(""), 3000); // hide message after 3s
     } catch (err) {
       console.error(err);
       setMessage("Failed to submit story.");
@@ -23,31 +24,18 @@ export default function StoryForm({ onStorySubmitted }) {
   };
 
   return (
-    <section className="max-w-2xl mx-auto mb-12 bg-white text-gray-800 p-6 rounded-2xl shadow-lg">
-      <h2 className="text-2xl font-semibold mb-4 text-gray-900">Share Your Story</h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
+    <section className="story-form">
+      <h2>Share Your Story</h2>
+      <form onSubmit={handleSubmit}>
         <textarea
-          placeholder="Write whatever is on your chest..."
+          placeholder="What's on your chest?"
           value={content}
           onChange={(e) => setContent(e.target.value)}
           rows={5}
-          className="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500"
         />
-        <input
-          type="text"
-          placeholder="Category (optional)"
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
-          className="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500"
-        />
-        <button
-          type="submit"
-          className="bg-purple-600 hover:bg-purple-700 transition-all px-6 py-3 rounded-lg font-semibold text-white"
-        >
-          Share
-        </button>
+        <button type="submit">Thank You for Sharing</button>
       </form>
-      {message && <p className="mt-2 text-green-600 font-medium">{message}</p>}
+      {message && <p style={{ marginTop: "0.5rem", textAlign: "center", color: "#28a745", fontWeight: "600" }}>{message}</p>}
     </section>
   );
 }
