@@ -1,10 +1,12 @@
-// Use CommonJS syntax for Render compatibility
-const express = require("express");
-const cors = require("cors");
-const bodyParser = require("body-parser");
-require("dotenv").config();
+import express from "express";
+import cors from "cors";
+import bodyParser from "body-parser";
+import dotenv from "dotenv";
+import pkg from "pg";
 
-const { Pool } = require("pg");
+dotenv.config();
+
+const { Pool } = pkg;
 
 // Initialize Postgres pool
 const pool = new Pool({
@@ -35,7 +37,9 @@ app.use(bodyParser.json());
 // POST /api/stories
 app.post("/api/stories", async (req, res) => {
   const { content } = req.body;
-  if (!content) return res.status(400).json({ message: "Content is required" });
+  if (!content) {
+    return res.status(400).json({ message: "Content is required" });
+  }
 
   try {
     const result = await pool.query(
@@ -52,7 +56,9 @@ app.post("/api/stories", async (req, res) => {
 // GET /api/stories
 app.get("/api/stories", async (req, res) => {
   try {
-    const result = await pool.query("SELECT * FROM stories ORDER BY created_at DESC");
+    const result = await pool.query(
+      "SELECT * FROM stories ORDER BY created_at DESC"
+    );
     res.json(result.rows);
   } catch (err) {
     console.error(err);
@@ -61,4 +67,6 @@ app.get("/api/stories", async (req, res) => {
 });
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, () =>
+  console.log(`🚀 Server running on port ${PORT}`)
+);
