@@ -1,3 +1,4 @@
+// components/ThemeToggle.jsx
 import { useEffect, useState } from "react";
 
 export default function ThemeToggle() {
@@ -13,18 +14,7 @@ export default function ThemeToggle() {
   return (
     <button
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-      style={{
-        position: "fixed",
-        top: "1rem",
-        right: "1rem",
-        borderRadius: "50%",
-        padding: "0.6rem 0.7rem",
-        border: "none",
-        cursor: "pointer",
-        background: "var(--bg-card)",
-        color: "var(--text-main)",
-        fontSize: "1rem"
-      }}
+      style={{ position: "fixed", top: 15, right: 15 }}
     >
       {theme === "dark" ? "☀️" : "🌙"}
     </button>
