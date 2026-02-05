@@ -1,175 +1,70 @@
-/* =====================
-   Global Styles
-===================== */
 :root {
-  --bg-main: #0a1a2f;
-  --bg-card: rgba(255,255,255,0.08);
-  --text-main: #f4f7fb;
-  --text-muted: #cfd9e6;
+  --bg: #0a1a2f;
+  --card: rgba(255,255,255,0.08);
+  --text: #f4f7fb;
+  --muted: #cfd9e6;
   --accent: #1e6fd9;
-  --card-shadow: rgba(0,0,0,0.35);
 }
 
 [data-theme="light"] {
-  --bg-main: #f4f7fb;
-  --bg-card: #ffffff;
-  --text-main: #0a1a2f;
-  --text-muted: #445;
-  --accent: #1e6fd9;
-  --card-shadow: rgba(0,0,0,0.15);
+  --bg: #f4f7fb;
+  --card: #ffffff;
+  --text: #0a1a2f;
+  --muted: #445;
 }
 
 body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
-  background: var(--bg-main);
-  color: var(--text-main);
-  overflow-x: hidden;
+  background: var(--bg);
+  color: var(--text);
 }
 
-/* =====================
-   Hero Section
-===================== */
 .hero {
   text-align: center;
-  padding: 5rem 1.5rem 4rem;
-  background: radial-gradient(
-    circle at top,
-    rgba(255,255,255,0.08),
-    transparent 60%
-  );
+  padding: 4rem 1.5rem;
 }
 
 .hero h1 {
-  font-size: 3.2rem;
-  font-weight: 800;
-  margin-bottom: 1rem;
-  color: #ffffff;
-  letter-spacing: 1px;
+  font-size: 3rem;
 }
 
-.hero p {
-  font-size: 1.15rem;
-  max-width: 720px;
-  margin: 0 auto;
-  line-height: 1.7;
-  color: #cfd9e6;
-}
-
-/* =====================
-   Story Form Card
-===================== */
 .story-form {
-  background: #ffffff;
-  color: #0a1a2f;
-  max-width: 640px;
-  margin: -2.5rem auto 3rem;
+  background: var(--card);
+  max-width: 650px;
+  margin: -2rem auto 2rem;
   padding: 2rem;
-  border-radius: 1.75rem;
-  box-shadow: 0 25px 60px rgba(0,0,0,0.35);
-}
-
-.story-form h2 {
-  font-size: 1.8rem;
-  margin-bottom: 0.75rem;
-  color: #0a1a2f;
-  text-align: center;
+  border-radius: 1.5rem;
 }
 
 .story-form textarea {
   width: 100%;
-  padding: 1.2rem;
-  margin: 1rem 0 1.5rem;
-  border-radius: 1.2rem;
-  border: 1px solid #d9e1ec;
-  font-size: 1rem;
-  font-family: inherit;
-  resize: vertical;
-  outline: none;
-}
-
-.story-form textarea:focus {
-  border-color: #1e6fd9;
+  padding: 1rem;
+  border-radius: 1rem;
+  border: none;
 }
 
 .story-form button {
   width: 100%;
-  background: linear-gradient(135deg, #1e6fd9, #3fa9f5);
-  color: white;
+  margin-top: 1rem;
+  background: var(--accent);
   border: none;
-  padding: 0.9rem;
-  border-radius: 1.2rem;
-  font-size: 1.1rem;
-  font-weight: 600;
+  color: white;
+  padding: 0.8rem;
+  border-radius: 1rem;
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.story-form button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(30,111,217,0.4);
-}
-
-/* =====================
-   Stories Feed
-===================== */
 .stories-feed {
   max-width: 900px;
-  margin: 0 auto 4rem;
-  padding: 0 1.2rem;
+  margin: auto;
+  padding: 1rem;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 1.5rem;
 }
 
-/* =====================
-   Story Card
-===================== */
 .story-card {
-  background: rgba(255,255,255,0.08);
-  backdrop-filter: blur(8px);
-  padding: 1.4rem 1.6rem;
+  background: var(--card);
+  padding: 1.5rem;
   border-radius: 1.5rem;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.story-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.45);
-}
-
-.story-card p {
-  font-size: 1rem;
-  line-height: 1.6;
-  color: #e6edf6;
-}
-
-/* =====================
-   Empty State
-===================== */
-.empty-state {
-  grid-column: 1 / -1;
-  text-align: center;
-  color: #cfd9e6;
-  font-size: 1.1rem;
-  opacity: 0.85;
-}
-
-/* =====================
-   Mobile Optimizations
-===================== */
-@media (max-width: 600px) {
-  .hero h1 {
-    font-size: 2.4rem;
-  }
-
-  .hero p {
-    font-size: 1rem;
-  }
-
-  .story-form {
-    margin: -2rem 1rem 2.5rem;
-    padding: 1.5rem;
-  }
 }
