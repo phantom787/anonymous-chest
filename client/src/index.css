@@ -22,8 +22,8 @@
 body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
-  background: linear-gradient(180deg, #0a1a2f, #0f2a4a);
-  color: #f4f7fb;
+  background: var(--bg-main);
+  color: var(--text-main);
   overflow-x: hidden;
 }
 
