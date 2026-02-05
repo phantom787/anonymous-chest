@@ -30,9 +30,14 @@ export default function Home() {
     <>
       <ThemeToggle />
       <header className="hero">
-        <h1>Open Chest</h1>
-        <p>Anonymous stories. Real healing. You’re not alone.</p>
-      </header>
+  <h1>Open Chest</h1>
+  <p>
+    Some things are too heavy to carry alone.  
+    Leave them here.
+  </p>
+  <button className="hero-cta">Read Stories</button>
+</header>
+
 
       <CrisisBanner />
 
