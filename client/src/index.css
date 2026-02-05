@@ -1,96 +1,161 @@
-button {
-  transition: transform 0.15s ease, opacity 0.15s ease;
-}
-
-button:active {
-  transform: scale(0.96);
-  opacity: 0.85;
-}
-
-.hero-cta {
-  margin-top: 1.5rem;
-  padding: 0.9rem 2rem;
-  border-radius: 2rem;
-  border: none;
-  background: white;
-  color: #0a1a2f;
-  font-weight: 700;
-  cursor: pointer;
-}
-
+/* Global Styles */
 :root {
-  --bg: #0a1a2f;
-  --card: rgba(255,255,255,0.08);
-  --text: #f4f7fb;
-  --muted: #cfd9e6;
-  --accent: #1e6fd9;
+  --bg-color: #0a1f3f;        /* Dark blue background */
+  --card-bg: #112b4f;         /* Slightly lighter card */
+  --text-color: #e0eaff;      /* Light text */
+  --accent-color: #4fd1c5;    /* Mint / cyan accent */
+  --button-bg: #4fd1c5;
+  --button-hover: #38b2ac;
 }
 
 [data-theme="light"] {
-  --bg: #f4f7fb;
-  --card: #ffffff;
-  --text: #0a1a2f;
-  --muted: #445;
+  --bg-color: #f0f4f8;
+  --card-bg: #ffffff;
+  --text-color: #0a1f3f;
+  --accent-color: #1e6fd9;
+  --button-bg: #1e6fd9;
+  --button-hover: #1452a0;
 }
 
 body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
-  background: var(--bg);
-  color: var(--text);
+  background: var(--bg-color);
+  color: var(--text-color);
+  overflow-x: hidden;
+  transition: background 0.3s, color 0.3s;
 }
 
+/* Hero Section */
 .hero {
   text-align: center;
-  padding: 4rem 1.5rem;
+  padding: 6rem 1.5rem 3rem;
 }
 
 .hero h1 {
   font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  color: var(--accent-color);
 }
 
+.hero p {
+  font-size: 1.2rem;
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Story Form */
 .story-form {
-  background: var(--card);
-  max-width: 650px;
-  margin: -2rem auto 2rem;
+  background: var(--card-bg);
+  color: var(--text-color);
+  max-width: 600px;
+  margin: 2rem auto;
   padding: 2rem;
   border-radius: 1.5rem;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+}
+
+.story-form h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  color: var(--accent-color);
 }
 
 .story-form textarea {
   width: 100%;
   padding: 1rem;
+  margin-bottom: 1rem;
   border-radius: 1rem;
   border: none;
+  font-size: 1rem;
+  background: #0f3a70;
+  color: var(--text-color);
+  resize: vertical;
 }
 
 .story-form button {
   width: 100%;
-  margin-top: 1rem;
-  background: var(--accent);
-  border: none;
+  background: var(--button-bg);
   color: white;
-  padding: 0.8rem;
+  border: none;
+  padding: 0.75rem;
   border-radius: 1rem;
+  font-size: 1.1rem;
+  font-weight: 600;
   cursor: pointer;
+  transition: all 0.3s ease;
 }
 
+.story-form button:hover {
+  background: var(--button-hover);
+}
+
+/* Stories Feed */
 .stories-feed {
-  max-width: 900px;
-  margin: auto;
-  padding: 1rem;
+  max-width: 800px;
+  margin: 2rem auto 4rem;
   display: grid;
+  grid-template-columns: 1fr;
   gap: 1.5rem;
+  padding: 0 1rem;
 }
 
 .story-card {
-  background: rgba(255,255,255,0.1);
-  border-left: 4px solid var(--accent);
-  padding: 1.6rem;
-  border-radius: 1.2rem;
-  transition: all 0.25s ease;
+  background: var(--card-bg);
+  padding: 1.5rem 2rem;
+  border-radius: 1.5rem;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .story-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+}
+
+.story-card p {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--text-color);
+}
+
+.story-card button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-weight: 600;
+  margin-top: 0.5rem;
+  transition: transform 0.2s, color 0.2s;
+}
+
+.story-card button:active {
+  transform: scale(1.2);
+}
+
+.story-card button.helped {
+  color: var(--accent-color);
+}
+
+.story-card button.delete {
+  color: #ff4b5c;
+  margin-left: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .hero h1 {
+    font-size: 2.2rem;
+  }
+  .hero p {
+    font-size: 1rem;
+  }
+  .story-form {
+    margin: 1.5rem 1rem;
+    padding: 1rem;
+  }
+  .story-form h2 {
+    font-size: 1.5rem;
+  }
 }
