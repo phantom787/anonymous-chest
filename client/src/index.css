@@ -1,6 +1,24 @@
 /* =====================
    Global Styles
 ===================== */
+:root {
+  --bg-main: #0a1a2f;
+  --bg-card: rgba(255,255,255,0.08);
+  --text-main: #f4f7fb;
+  --text-muted: #cfd9e6;
+  --accent: #1e6fd9;
+  --card-shadow: rgba(0,0,0,0.35);
+}
+
+[data-theme="light"] {
+  --bg-main: #f4f7fb;
+  --bg-card: #ffffff;
+  --text-main: #0a1a2f;
+  --text-muted: #445;
+  --accent: #1e6fd9;
+  --card-shadow: rgba(0,0,0,0.15);
+}
+
 body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
