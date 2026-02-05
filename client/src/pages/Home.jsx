@@ -49,6 +49,9 @@ export default function Home() {
         onChange={e => setQuery(e.target.value)}
         style={{ display: "block", margin: "1rem auto", padding: "0.6rem" }}
       />
+      <p>
+        Don't forget to refresh the page for more stories.
+      </p>
 
       <section className="stories-feed">
         {filtered.map(story => (
