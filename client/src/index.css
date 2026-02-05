@@ -75,7 +75,13 @@ body {
 }
 
 .story-card {
-  background: var(--card);
-  padding: 1.5rem;
-  border-radius: 1.5rem;
+  background: rgba(255,255,255,0.1);
+  border-left: 4px solid var(--accent);
+  padding: 1.6rem;
+  border-radius: 1.2rem;
+  transition: all 0.25s ease;
+}
+
+.story-card:hover {
+  transform: translateY(-4px);
 }
