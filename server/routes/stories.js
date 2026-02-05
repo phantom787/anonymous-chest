@@ -20,7 +20,9 @@ router.post("/", async (req, res) => {
   );
   res.sendStatus(201);
 });
-router.post("/stories/:id/helped", async (req, res) => {
+
+// ❤️ This helped me
+router.post("/:id/helped", async (req, res) => {
   try {
     const { id } = req.params;
 
@@ -44,6 +46,5 @@ router.post("/stories/:id/helped", async (req, res) => {
     res.status(500).json({ error: "Failed to update support count" });
   }
 });
-
 
 export default router;
