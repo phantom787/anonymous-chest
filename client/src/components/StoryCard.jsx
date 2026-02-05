@@ -9,9 +9,21 @@ export default function StoryCard({ story, isAdmin, onDelete }) {
       </small>
 
       {isAdmin && (
-        <button className="danger" onClick={() => onDelete(story.id)}>
-          Delete
-        </button>
+        <button
+  onClick={() => api.post(`/stories/${story.id}/helped`)
+    .then(fetchStories)}
+  style={{
+    marginTop: "1rem",
+    background: "transparent",
+    border: "none",
+    color: "var(--accent)",
+    cursor: "pointer",
+    fontWeight: "600"
+  }}
+>
+  ❤️ This helped me ({story.helpedCount || 0})
+</button>
+
       )}
     </div>
   );
