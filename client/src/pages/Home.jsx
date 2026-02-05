@@ -1,52 +1,60 @@
+// pages/Home.jsx
 import { useEffect, useState } from "react";
 import { api } from "../services/api";
+import ThemeToggle from "../components/ThemeToggle";
+import CrisisBanner from "../components/CrisisBanner";
 import StoryForm from "../components/StoryForm";
-import "../index.css";
-import <ThemeToggle />
-
+import StoryCard from "../components/StoryCard";
 
 export default function Home() {
   const [stories, setStories] = useState([]);
+  const [query, setQuery] = useState("");
+
+  const isAdmin =
+    new URLSearchParams(window.location.search).get("admin") === "true";
 
   const fetchStories = async () => {
-    try {
-      const res = await api.get("/stories");
-      setStories(res.data.reverse()); // newest first
-    } catch (err) {
-      console.error(err);
-    }
+    const res = await api.get("/stories");
+    setStories(res.data.reverse());
   };
 
   useEffect(() => {
     fetchStories();
   }, []);
 
+  const filtered = stories.filter(s =>
+    s.content.toLowerCase().includes(query.toLowerCase())
+  );
+
   return (
-    <div>
-      {/* Hero Section */}
+    <>
+      <ThemeToggle />
       <header className="hero">
         <h1>Open Chest</h1>
-        <p>A safe, anonymous place to share your story and heal from others. You are never alone.</p>
+        <p>Anonymous stories. Real healing. You’re not alone.</p>
       </header>
 
-      {/* Story Form */}
+      <CrisisBanner />
+
       <StoryForm onStorySubmitted={fetchStories} />
 
-      {/* Stories Feed */}
+      <input
+        placeholder="Search stories…"
+        value={query}
+        onChange={e => setQuery(e.target.value)}
+        style={{ display: "block", margin: "1rem auto", padding: "0.6rem" }}
+      />
+
       <section className="stories-feed">
-  {stories.length === 0 && (
-    <p className="empty-state">
-      No stories yet. Be the first to open your chest 🤍
-    </p>
-  )}
-
-  {stories.map((story) => (
-    <div key={story.id} className="story-card">
-      <p>{story.content}</p>
-    </div>
-  ))}
-</section>
-
-    </div>
+        {filtered.map(story => (
+          <StoryCard
+            key={story.id}
+            story={story}
+            refresh={fetchStories}
+            isAdmin={isAdmin}
+          />
+        ))}
+      </section>
+    </>
   );
 }
