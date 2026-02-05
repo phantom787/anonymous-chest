@@ -36,12 +36,10 @@ router.post("/:id/helped", async (req, res) => {
   try {
     const { id } = req.params;
     const result = await pool.query(
-      `
-      UPDATE stories
-      SET helped_count = helped_count + 1
-      WHERE id = $1
-      RETURNING helped_count
-      `,
+      `UPDATE stories
+       SET helped_count = helped_count + 1
+       WHERE id = $1
+       RETURNING helped_count`,
       [id]
     );
 
