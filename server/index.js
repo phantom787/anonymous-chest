@@ -3,6 +3,7 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
 import pkg from "pg";
+import storiesRoutes from "./routes/stories.js"
 
 dotenv.config();
 
