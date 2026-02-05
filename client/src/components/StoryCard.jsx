@@ -1,13 +1,17 @@
+// components/StoryCard.jsx
 import { useState } from "react";
 import { api } from "../services/api";
 
 export default function StoryCard({ story, refresh, isAdmin }) {
+  // ✅ define all functions and state at the top of the component
   const [helpedCount, setHelpedCount] = useState(story.helped_count || 0);
   const [clicked, setClicked] = useState(false);
 
   const handleHelped = async () => {
-    if (clicked) return;
+    if (clicked) return; // prevent spamming
     setClicked(true);
+
+    // Optimistic UI
     setHelpedCount(prev => prev + 1);
 
     try {
@@ -15,7 +19,7 @@ export default function StoryCard({ story, refresh, isAdmin }) {
       refresh();
     } catch (err) {
       console.error("Helped failed:", err);
-      setHelpedCount(prev => prev - 1);
+      setHelpedCount(prev => prev - 1); // rollback
     } finally {
       setClicked(false);
     }
