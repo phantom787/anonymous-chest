@@ -17,6 +17,8 @@ const pool = new Pool({
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
+app.use("/api", storiesRoutes);
+
 
 // Initialize table
 (async () => {
