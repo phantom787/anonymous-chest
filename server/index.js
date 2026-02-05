@@ -13,7 +13,7 @@ app.use(express.json());
 // Mount stories router
 app.use("/api/stories", storiesRoutes);
 
-// Initialize table if not exists
+// Initialize table
 (async () => {
   try {
     await pool.query(`
@@ -30,6 +30,9 @@ app.use("/api/stories", storiesRoutes);
     console.error("Error creating table:", err);
   }
 })();
+
+// Health check
+app.get("/api/health", (req, res) => res.json({ status: "ok" }));
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
