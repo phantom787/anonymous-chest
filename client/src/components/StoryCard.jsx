@@ -1,29 +1,25 @@
-export default function StoryCard({ story, isAdmin, onDelete }) {
+// components/StoryCard.jsx
+import { api } from "../services/api";
+
+export default function StoryCard({ story, refresh, isAdmin }) {
   return (
-    <div className="card">
+    <div className="story-card">
       <p>{story.content}</p>
 
-      <small className="muted">
-        {story.category} •{" "}
-        {new Date(story.created_at).toLocaleDateString()}
-      </small>
+      <button
+        onClick={() => api.post(`/stories/${story.id}/helped`).then(refresh)}
+        style={{ background: "none", border: "none", color: "#1e6fd9" }}
+      >
+        ❤️ This helped me ({story.helpedCount || 0})
+      </button>
 
       {isAdmin && (
         <button
-  onClick={() => api.post(`/stories/${story.id}/helped`)
-    .then(fetchStories)}
-  style={{
-    marginTop: "1rem",
-    background: "transparent",
-    border: "none",
-    color: "var(--accent)",
-    cursor: "pointer",
-    fontWeight: "600"
-  }}
->
-  ❤️ This helped me ({story.helpedCount || 0})
-</button>
-
+          onClick={() => api.delete(`/stories/${story.id}`).then(refresh)}
+          style={{ color: "red", marginLeft: "1rem" }}
+        >
+          Delete
+        </button>
       )}
     </div>
   );
