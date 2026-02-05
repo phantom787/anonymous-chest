@@ -5,27 +5,36 @@ const router = express.Router();
 
 // Get all stories
 router.get("/", async (req, res) => {
-  const { rows } = await pool.query(
-    "SELECT * FROM stories ORDER BY created_at DESC"
-  );
-  res.json(rows);
+  try {
+    const { rows } = await pool.query(
+      "SELECT * FROM stories ORDER BY created_at DESC"
+    );
+    res.json(rows);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Failed to fetch stories" });
+  }
 });
 
 // Add story
 router.post("/", async (req, res) => {
   const { content, category } = req.body;
-  await pool.query(
-    "INSERT INTO stories (content, category) VALUES ($1, $2)",
-    [content, category]
-  );
-  res.sendStatus(201);
+  try {
+    const result = await pool.query(
+      "INSERT INTO stories (content, category) VALUES ($1, $2) RETURNING *",
+      [content, category]
+    );
+    res.status(201).json(result.rows[0]);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Failed to add story" });
+  }
 });
 
-// ❤️ This helped me
+// "This helped me"
 router.post("/:id/helped", async (req, res) => {
   try {
     const { id } = req.params;
-
     const result = await pool.query(
       `
       UPDATE stories
