@@ -24,7 +24,7 @@ export default function Home() {
       {/* Hero Section */}
       <header className="hero">
         <h1>Open Chest</h1>
-        <p>A safe, anonymous place to share your story and read others. You are never alone.</p>
+        <p>A safe, anonymous place to share your story and heal from others. You are never alone.</p>
       </header>
 
       {/* Story Form */}
