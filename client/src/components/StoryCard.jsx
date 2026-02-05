@@ -1,14 +1,23 @@
-// components/StoryCard.jsx
+import { useState } from "react";
 import { api } from "../services/api";
 
 export default function StoryCard({ story, refresh, isAdmin }) {
-  // ✅ define your click handler here, outside the JSX
+  const [helpedCount, setHelpedCount] = useState(story.helped_count || 0);
+  const [clicked, setClicked] = useState(false);
+
   const handleHelped = async () => {
+    if (clicked) return;
+    setClicked(true);
+    setHelpedCount(prev => prev + 1);
+
     try {
       await api.post(`/stories/${story.id}/helped`);
-      refresh(); // refetch stories after increment
+      refresh();
     } catch (err) {
       console.error("Helped failed:", err);
+      setHelpedCount(prev => prev - 1);
+    } finally {
+      setClicked(false);
     }
   };
 
@@ -26,31 +35,18 @@ export default function StoryCard({ story, refresh, isAdmin }) {
       <p>{story.content}</p>
 
       <button
-        type="button"
         onClick={handleHelped}
+        className="helped"
         style={{
-          background: "none",
-          border: "none",
-          color: "#1e6fd9",
-          cursor: "pointer",
-          fontWeight: "600",
-          marginTop: "0.5rem"
+          transform: clicked ? "scale(1.3)" : "scale(1)",
+          transition: "transform 0.2s",
         }}
       >
-        ❤️ This helped me ({story.helpedCount || 0})
+        ❤️ This helped me ({helpedCount})
       </button>
 
       {isAdmin && (
-        <button
-          type="button"
-          onClick={handleDelete}
-          style={{
-            color: "red",
-            marginLeft: "1rem",
-            fontWeight: "600",
-            cursor: "pointer"
-          }}
-        >
+        <button onClick={handleDelete} className="delete">
           Delete
         </button>
       )}
