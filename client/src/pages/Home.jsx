@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { api } from "../services/api";
 import StoryForm from "../components/StoryForm";
 import "../index.css";
+import <ThemeToggle />
+
 
 export default function Home() {
   const [stories, setStories] = useState([]);
