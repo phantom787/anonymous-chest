@@ -32,15 +32,19 @@ export default function Home() {
 
       {/* Stories Feed */}
       <section className="stories-feed">
-        {stories.length === 0 && (
-          <p style={{ textAlign: "center", color: "#c4f0b0" }}>No stories yet!</p>
-        )}
-        {stories.map((story) => (
-          <div key={story.id} className="story-card">
-            <p>{story.content}</p>
-          </div>
-        ))}
-      </section>
+  {stories.length === 0 && (
+    <p className="empty-state">
+      No stories yet. Be the first to open your chest 🤍
+    </p>
+  )}
+
+  {stories.map((story) => (
+    <div key={story.id} className="story-card">
+      <p>{story.content}</p>
+    </div>
+  ))}
+</section>
+
     </div>
   );
 }
